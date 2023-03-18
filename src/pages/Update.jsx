@@ -76,9 +76,7 @@ function Update() {
                             value={avatar}
                             type="text"
                             placeholder="avatar" />
-
-
-                        <button type="submit" className="btn btn-primary">Add user</button>
+                        <button type="submit" className="btn btn-primary">Save</button>
 
                     </form>
                 </div>

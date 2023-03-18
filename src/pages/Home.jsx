@@ -9,6 +9,8 @@ function Home() {
 
   const [usersList, setUsersList] = useState()
 
+
+
   useEffect(() => {
     const fetchUsers = async () => {
       const { data } = await supabase
@@ -21,7 +23,10 @@ function Home() {
       //   console.log(error)
       // }
       if (data) {
-        setUsersList(data)
+        const numDescending = [...data].sort((a, b) => b.id - a.id);
+        console.log(numDescending);
+
+        setUsersList(numDescending)
         // setFetchError(null)
       }
     }
@@ -29,6 +34,8 @@ function Home() {
     fetchUsers()
 
   }, [usersList])
+
+
 
   return (
     <div className="container my-3">
