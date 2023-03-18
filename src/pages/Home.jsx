@@ -16,6 +16,7 @@ function Home() {
       const { data } = await supabase
         .from('users')
         .select()
+        .order('created_at', { ascending: false })
 
       // if (error) {
       //   setFetchError('Deu merda')
@@ -23,17 +24,17 @@ function Home() {
       //   console.log(error)
       // }
       if (data) {
-        const numDescending = [...data].sort((a, b) => b.id - a.id);
-        console.log(numDescending);
+        // const numDescending = [...data].sort((a, b) => b.id - a.id);
+        // console.log(numDescending);
 
-        setUsersList(numDescending)
+        setUsersList(data)
         // setFetchError(null)
       }
     }
 
     fetchUsers()
 
-  }, [usersList])
+  }, [])
 
 
 
