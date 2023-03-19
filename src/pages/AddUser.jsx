@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../config/supabase";
 
-function AddUser() {
+function AddUser({ token }) {
 
     const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ function AddUser() {
         e.preventDefault()
 
         const { data } = await supabase
-            .from('users')
+            .from('people')
             .insert([
                 { name: name, email: email, avatar: avatar },
             ])
@@ -27,40 +27,49 @@ function AddUser() {
 
     }
 
+    const returnHome = () => {
+        useEffect(() => {
+            navigate('/home')
+        }, [])
+    }
 
 
     return (
+
+
         <div className="container my-5">
-            <div className="row">
-                <div className="col-sm-8 col-11 mx-auto p-4 bg-dark text-white rounded">
-                    <form onSubmit={handleSubmit}>
-                        <input className="form-control mb-3"
-                            onChange={(e) => setName(e.target.value)}
-                            id="name"
-                            value={name}
-                            type="text"
-                            placeholder="Name" />
+            {token ? (
+                <div className="row">
+                    <div className="col-sm-8 col-11 mx-auto p-4 bg-dark text-white rounded">
+                        <form onSubmit={handleSubmit}>
+                            <input className="form-control mb-3"
+                                onChange={(e) => setName(e.target.value)}
+                                id="name"
+                                value={name}
+                                type="text"
+                                placeholder="Name" />
 
-                        <input className="form-control mb-3"
-                            onChange={(e) => setEmail(e.target.value)}
-                            id="email"
-                            value={email}
-                            type="text"
-                            placeholder="Email" />
+                            <input className="form-control mb-3"
+                                onChange={(e) => setEmail(e.target.value)}
+                                id="email"
+                                value={email}
+                                type="text"
+                                placeholder="Email" />
 
-                        <input className="form-control mb-3"
-                            onChange={(e) => setAvatar(e.target.value)}
-                            id="avatar"
-                            value={avatar}
-                            type="text"
-                            placeholder="avatar" />
+                            <input className="form-control mb-3"
+                                onChange={(e) => setAvatar(e.target.value)}
+                                id="avatar"
+                                value={avatar}
+                                type="text"
+                                placeholder="avatar" />
 
 
-                        <button type="submit" className="btn btn-primary">Add user</button>
+                            <button type="submit" className="btn btn-primary">Add user</button>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            ) : returnHome()}
         </div>
     )
 }

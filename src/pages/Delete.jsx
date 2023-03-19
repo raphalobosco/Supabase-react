@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import supabase from "../config/supabase"
 import { useNavigate } from "react-router-dom"
-import AddUser from "./AddUser"
+
 
 function Update() {
     const [name, setName] = useState('')
@@ -16,7 +16,7 @@ function Update() {
     useEffect(() => {
         const fetchUsers = async () => {
             const { data } = await supabase
-                .from('users')
+                .from('people')
                 .select()
                 .eq('id', id)
                 .single()
@@ -36,18 +36,18 @@ function Update() {
         e.preventDefault()
 
         const { data } = await supabase
-            .from('users')
+            .from('people')
             .delete()
             .eq('id', id)
 
-        navigate('/')
+        navigate('/home')
 
 
     }
 
     const handleBack = async (e) => {
         e.preventDefault()
-        navigate('/')
+        navigate('/home')
     }
 
     return (

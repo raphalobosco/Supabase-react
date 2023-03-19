@@ -15,7 +15,7 @@ function Update() {
     useEffect(() => {
         const fetchUsers = async () => {
             const { data } = await supabase
-                .from('users')
+                .from('people')
                 .select()
                 .eq('id', id)
                 .single()
@@ -35,7 +35,7 @@ function Update() {
         e.preventDefault()
 
         const { data } = await supabase
-            .from('users')
+            .from('people')
             .update([
                 { name: name, email: email, avatar: avatar },
             ])
