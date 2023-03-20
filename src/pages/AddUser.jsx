@@ -21,7 +21,7 @@ function AddUser({ token }) {
             .select()
 
         if (data) {
-            navigate('/')
+            navigate('/home')
         }
 
 
@@ -29,7 +29,7 @@ function AddUser({ token }) {
 
     const returnHome = () => {
         useEffect(() => {
-            navigate('/home')
+            navigate('/')
         }, [])
     }
 

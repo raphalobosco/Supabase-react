@@ -43,7 +43,7 @@ function Update() {
             .select()
 
         if (data) {
-            navigate('/')
+            navigate('/home')
         }
 
 
